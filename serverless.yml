@@ -30,3 +30,21 @@ functions:
           path: webhook
           method: post
 
+resources:
+  Resources:
+    RidesDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: ride
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: ride
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: LyftRides
