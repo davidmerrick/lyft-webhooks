@@ -25,4 +25,8 @@ package:
 functions:
   hello:
     handler: com.merricklabs.lyft-webhooks.Handler
+    events:
+      - http:
+          path: hello
+          method: get
 
