@@ -27,20 +27,20 @@ repositories {
 }
 
 dependencies {
-    compile(
+    implementation(
             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
             'org.koin:koin-core:1.0.1',
-            'io.github.microutils:kotlin-logging:1.6.10'
+            'io.github.microutils:kotlin-logging:1.6.10',
+            'com.amazonaws:aws-lambda-java-core:1.1.0',
+            'com.amazonaws:aws-lambda-java-log4j2:1.0.0',
+            'com.amazonaws:aws-lambda-java-events:2.0.1',
+            'com.amazonaws:aws-java-sdk-dynamodb:1.11.527',
+            'com.fasterxml.jackson.core:jackson-core:2.8.5',
+            'com.fasterxml.jackson.core:jackson-databind:2.8.5',
+            'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
     )
-    compile group: 'com.amazonaws', name: 'aws-lambda-java-core', version:'1.1.0'
-    compile group: 'com.amazonaws', name: 'aws-lambda-java-log4j2', version:'1.0.0'
-    compile group: 'com.amazonaws', name: 'aws-lambda-java-events', version:'2.0.1'
 
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.8.5'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.8.5'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version:'2.8.5'
-
-    testCompile(
+    testImplementation(
             'org.testng:testng:6.14.3',
             'org.koin:koin-test:1.0.1'
     )

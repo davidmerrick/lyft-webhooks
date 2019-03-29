@@ -24,7 +24,7 @@ package:
 
 functions:
   webhook:
-    handler: com.merricklabs.lyft-webhooks.Handler
+    handler: com.merricklabs.lyft.Handler
     events:
       - http:
           path: webhook

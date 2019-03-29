@@ -1,0 +1,98 @@
+{
+  "event_id": "fd370b4f-dea1-507d-9295-49767daacb29",
+  "href": "https://api.lyft.com/v1/rides/123456789",
+  "occurred_at": "2017-07-26T11:14:14+00:00",
+  "event_type": "ride.receipt.ready",
+  "event": {
+    "origin": {
+      "lat": 37.76734,
+      "lng": -122.40626,
+      "eta_seconds": null,
+      "address": null
+    },
+    "line_items": [
+      {
+        "currency": "USD",
+        "amount": 500,
+        "type": "Lyft fare"
+      },
+      {
+        "currency": "USD",
+        "amount": 200,
+        "type": "Service fee"
+      },
+      {
+        "currency": "USD",
+        "amount": 200,
+        "type": "Tip"
+      }
+    ],
+    "passenger": {
+      "rating": "5",
+      "first_name": "John",
+      "last_name": "Doe",
+      "image_url": "https://lyft-app-img.s3.amazonaws.com/production/profilePicture/12345",
+      "user_id": "123456789"
+    },
+    "distance_miles": 1.22,
+    "duration_seconds": 432,
+    "dropoff": {
+      "lat": 37.77661,
+      "lng": -122.39221,
+      "address": "555 Berry St, San Francisco, CA 94107",
+      "time": "2017-07-26T18:12:38+00:00"
+    },
+    "charges": [
+      {
+        "payment_method": "Card",
+        "currency": "USD",
+        "amount": 200
+      },
+      {
+        "payment_method": "Lyft Credit",
+        "currency": "USD",
+        "amount": 700
+      }
+    ],
+    "requested_at": "2017-07-26T18:03:38+00:00",
+    "price": {
+      "currency": "USD",
+      "amount": 200,
+      "description": "Total ride price"
+    },
+    "destination": {
+      "lat": 37.77653,
+      "lng": -122.39215,
+      "eta_seconds": null,
+      "address": null
+    },
+    "driver": {
+      "phone_number": "+15555555555",
+      "rating": "4.9",
+      "first_name": "Jane",
+      "image_url": "https://lyftapi.s3.amazonaws.com/production/photos/320x200/123456_driver.jpg"
+    },
+    "pricing_details_url": "https://www.lyft.com/pricing/SFO",
+    "pickup": {
+      "lat": 37.76716,
+      "lng": -122.40628,
+      "address": "559 15th St, San Francisco, CA 94103",
+      "time": "2017-07-26T18:05:25+00:00"
+    },
+    "status": "droppedOff",
+    "ride_id": "123456789",
+    "generated_at": "2017-07-26T18:14:14+00:00",
+    "vehicle": {
+      "color": "Red",
+      "make": "Chevy",
+      "license_plate": "ABCDEFG",
+      "image_url": "https://s3.amazonaws.com/lyftapi/production/photos/stockcarphotos/whitebg/640x400/2015/chevy/bolt/red/12345.png",
+      "year": 2015,
+      "license_plate_state": "CA",
+      "model": "Bolt"
+    },
+    "ride_type": "lyft",
+    "route_url": "https://www.lyft.com/sr/abcdefg",
+    "ride_profile": "personal"
+  }
+}
