@@ -23,10 +23,10 @@ package:
   artifact: build/libs/lyft-webhooks-dev.jar
 
 functions:
-  hello:
+  webhook:
     handler: com.merricklabs.lyft-webhooks.Handler
     events:
       - http:
-          path: hello
-          method: get
+          path: webhook
+          method: post
 
