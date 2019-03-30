@@ -1,5 +1,8 @@
 service: lyft-webhooks
 
+custom:
+  tableName: LyftRides
+
 provider:
   name: aws
   runtime: java8
@@ -12,7 +15,7 @@ provider:
       Action:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
-      Resource: "arn:aws:dynamodb:*:*:table/LyftRides"
+      Resource: arn:aws:dynamodb:*:*:table/${self:custom.tableName}
 
 package:
   artifact: build/libs/lyft-webhooks-dev.jar
@@ -42,4 +45,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: LyftRides
+        TableName: ${self:custom.tableName}
