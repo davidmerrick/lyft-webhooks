@@ -6,7 +6,7 @@ But then, partway through, I came across this in the docs:
 So it's not really suitable for that purpose, unless I wanted to write my own Lyft client 🙂. 
 
 However, it was a good exercise in using the [Serverless framework](https://serverless.com/) to provision AWS resources, 
-storing nested data in DynamoDB, and in creating a webhook handler in Kotlin. So I'm making it public on GitHub on the hope
+storing nested data in DynamoDB, and in creating a webhook handler in Kotlin. So I'm making it public on GitHub in the hope
 that it's useful for others as a reference.
 
 ## Usage 
