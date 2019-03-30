@@ -5,6 +5,14 @@ provider:
   runtime: java8
   stage: dev
   region: us-west-2
+  memorySize: 512
+  timeout: 10
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+      Resource: "arn:aws:dynamodb:*:*:table/LyftRides"
 
 package:
   artifact: build/libs/lyft-webhooks-dev.jar
@@ -12,12 +20,13 @@ package:
 functions:
   webhook:
     handler: com.merricklabs.lyft.Handler
+    environment:
+      DYNAMODB_ENDPOINT: "https://dynamodb.us-west-2.amazonaws.com"
     events:
       - http:
           path: webhook
           method: post
 
-# Todo: Grant privileges for Lambda to PUT to DynamoDB table
 resources:
   Resources:
     RidesDynamoDbTable:
@@ -25,14 +34,12 @@ resources:
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          -
-            AttributeName: ride
+          - AttributeName: ride
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: ride
+          - AttributeName: ride
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: Rides
+        TableName: LyftRides

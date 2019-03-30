@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@DynamoDBTable(tableName = "Rides")
+@DynamoDBTable(tableName = "LyftRides")
 data class Ride(
         @JsonProperty("ride_id") @DynamoDBHashKey(attributeName = "ride") val rideId: String,
         @JsonProperty("price") @DynamoDBAttribute(attributeName = "price") val price: RidePrice
