@@ -12,40 +12,39 @@ import org.apache.logging.log4j.LogManager
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper
 import com.merricklabs.lyft.models.LyftEvent
 
-
-// Todo: Get a webhook verification token and check for it. https://www.lyft.com/developers
 class Handler : RequestHandler<APIGatewayProxyRequestEvent, ApiGatewayResponse> {
+    private val mapper = ObjectMapper()
+
     override fun handleRequest(input: APIGatewayProxyRequestEvent, context: Context): ApiGatewayResponse {
-        if(!validateInput(input)){
+        if(!validateSignature(input)){
             return ApiGatewayResponse.build {
                 statusCode = 400
+                objectBody = WebhookResponse("Signature mismatch")
             }
         }
 
-        val mapper = ObjectMapper()
-        // Check if event_type is ride.receipt.ready
-        val lyftEvent = mapper.readValue(input.body, LyftEvent::class.java)
-        if(lyftEvent.eventType != "ride.receipt.ready"){
-            LOG.info("Incorrect event type: ${lyftEvent.eventType}")
+        if(!validateEventType(input)){
             return ApiGatewayResponse.build {
                 statusCode = 400
-                objectBody = WebhookResponse("event_type ${lyftEvent.eventType} is not supported by this endpoint")
+                objectBody = WebhookResponse("That event type is not supported by this endpoint")
             }
         }
 
         val receiptReadyEvent = mapper.readValue(input.body, ReceiptReadyEvent::class.java)
-
-        LOG.info("Saving ride to db")
         saveRideToDb(receiptReadyEvent.event)
 
         return ApiGatewayResponse.build {
-            statusCode = 200
-            objectBody = WebhookResponse("Your ride cost: $${receiptReadyEvent.event.price.amount/100}")
-            headers = mapOf("X-Powered-By" to "AWS Lambda & serverless")
+            statusCode = 204
         }
     }
 
-    private fun validateInput(input: APIGatewayProxyRequestEvent): Boolean {
+    private fun validateEventType(input: APIGatewayProxyRequestEvent): Boolean {
+        val lyftEvent = mapper.readValue(input.body, LyftEvent::class.java)
+        return lyftEvent.eventType != "ride.receipt.ready"
+    }
+
+    private fun validateSignature(input: APIGatewayProxyRequestEvent): Boolean {
+        // Todo: Verify that the signature matches the body: https://developer.lyft.com/v1/reference#section-webhook-verification
         // Check headers
         val signatureHeader = "X-Lyft-Signature"
         val signature = input.headers[signatureHeader]
